@@ -16,7 +16,7 @@ export default function ContactPage() {
   };
 
   return (
-    <main className="flex min-h-screen flex-col items-center p-24">
+    <main className="flex min-h-screen flex-col items-center p-4 sm:p-24">
       <h1 className="text-4xl font-bold mb-8">Contact Us</h1>
       <div className="w-full max-w-lg">
         <form

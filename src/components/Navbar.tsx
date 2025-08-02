@@ -5,11 +5,13 @@ import { useSelector, useDispatch } from 'react-redux';
 import { RootState, AppDispatch } from '@/lib/store';
 import { logout } from '@/lib/features/auth/authSlice';
 import { selectIsAuthenticated, selectUser } from '@/lib/features/auth/authSlice';
+import { useState } from 'react';
 
 export default function Navbar() {
   const isAuthenticated = useSelector(selectIsAuthenticated);
   const user = useSelector(selectUser);
   const dispatch = useDispatch<AppDispatch>();
+  const [isOpen, setIsOpen] = useState(false);
 
   const handleLogout = () => {
     dispatch(logout());
@@ -22,7 +24,7 @@ export default function Navbar() {
         <Link href="/" className="text-white text-lg font-bold">
           PokerLeaderboard
         </Link>
-        <div className="space-x-4">
+        <div className="hidden md:flex space-x-4">
           <Link href="/" className="text-gray-300 hover:text-white">
             Home
           </Link>
@@ -59,7 +61,91 @@ export default function Navbar() {
             </>
           )}
         </div>
+        <div className="md:hidden">
+          <button
+            onClick={() => setIsOpen(!isOpen)}
+            className="text-gray-300 hover:text-white focus:outline-none"
+          >
+            <svg
+              className="w-6 h-6"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d={isOpen ? 'M6 18L18 6M6 6l12 12' : 'M4 6h16M4 12h16m-7 6h7'}
+              ></path>
+            </svg>
+          </button>
+        </div>
       </div>
+      {isOpen && (
+        <div className="md:hidden mt-4">
+          <Link
+            href="/"
+            className="block text-gray-300 hover:text-white py-2"
+            onClick={() => setIsOpen(false)}
+          >
+            Home
+          </Link>
+          <Link
+            href="/events"
+            className="block text-gray-300 hover:text-white py-2"
+            onClick={() => setIsOpen(false)}
+          >
+            Events
+          </Link>
+          <Link
+            href="/members"
+            className="block text-gray-300 hover:text-white py-2"
+            onClick={() => setIsOpen(false)}
+          >
+            Members
+          </Link>
+          <Link
+            href="/contact"
+            className="block text-gray-300 hover:text-white py-2"
+            onClick={() => setIsOpen(false)}
+          >
+            Contact
+          </Link>
+          {isAuthenticated ? (
+            <>
+              <span className="block text-white py-2">Welcome, {user?.name}</span>
+              <button
+                onClick={() => {
+                  handleLogout();
+                  setIsOpen(false);
+                }}
+                className="block text-gray-300 hover:text-white py-2"
+              >
+                Logout
+              </button>
+            </>
+          ) : (
+            <>
+              <Link
+                href="/login"
+                className="block text-gray-300 hover:text-white py-2"
+                onClick={() => setIsOpen(false)}
+              >
+                Login
+              </Link>
+              <Link
+                href="/register"
+                className="block text-gray-300 hover:text-white py-2"
+                onClick={() => setIsOpen(false)}
+              >
+                Register
+              </Link>
+            </>
+          )}
+        </div>
+      )}
     </nav>
   );
 }

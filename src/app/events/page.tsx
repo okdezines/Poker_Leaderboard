@@ -21,7 +21,7 @@ export default function EventsPage() {
   ];
 
   return (
-    <main className="flex min-h-screen flex-col items-center p-24">
+    <main className="flex min-h-screen flex-col items-center p-4 sm:p-24">
       <h1 className="text-4xl font-bold mb-8">Upcoming Events</h1>
       <div className="w-full max-w-2xl">
         <ul className="space-y-4">

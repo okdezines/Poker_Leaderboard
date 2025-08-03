@@ -4,23 +4,35 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { loginSuccess } from '@/lib/features/auth/authSlice';
 import { AppDispatch } from '@/lib/store';
+import { useRouter } from 'next/navigation';
+import { jwtDecode } from 'jwt-decode';
 
 export default function LoginPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const dispatch = useDispatch<AppDispatch>();
+  const router = useRouter();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Mock authentication
-    if (email === 'test@example.com' && password === 'password') {
-      const user = { id: '1', name: 'Test User', email };
-      const token = 'fake-jwt-token';
+
+    const res = await fetch('/api/auth/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ email, password }),
+    });
+
+    if (res.ok) {
+      const { token } = await res.json();
+      const decoded: { userId: string } = jwtDecode(token);
+      const user = { id: decoded.userId, name: 'Test User', email }; // In a real app, you'd fetch the user's name
       dispatch(loginSuccess({ user, token }));
-      // Redirect to dashboard or members page
-      window.location.href = '/members';
+      router.push('/members');
     } else {
-      alert('Invalid credentials');
+      const { message } = await res.json();
+      alert(message);
     }
   };
 

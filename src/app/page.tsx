@@ -61,7 +61,7 @@ export default function Home() {
           <h2 className="text-2xl font-bold mb-4">Feature Game Winner</h2>
           <div className="relative w-full h-64">
             <Image
-              src="https://via.placeholder.com/400x300"
+              src="https://cdn.pixabay.com/photo/2024/03/24/06/17/ai-generated-8652520_960_720.png"
               alt="Feature Game Winner"
               layout="fill"
               objectFit="cover"

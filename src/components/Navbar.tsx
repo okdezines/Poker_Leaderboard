@@ -1,7 +1,7 @@
 'use client';
 
-import Image from 'next/image';
 import Link from 'next/link';
+import Image from 'next/image';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState, AppDispatch } from '@/lib/store';
 import { logout } from '@/lib/features/auth/authSlice';
@@ -30,7 +30,7 @@ export default function Navbar() {
             height={40}
             className="rounded-full"
           />
-          <span>Snakepit Leaderboard</span>
+          <span>PokerLeaderboard</span>
         </Link>
         <div className="hidden md:flex space-x-4">
           <Link href="/" className="text-gray-300 hover:text-white">

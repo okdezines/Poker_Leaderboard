@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState, AppDispatch } from '@/lib/store';
 import { logout } from '@/lib/features/auth/authSlice';
@@ -21,8 +22,15 @@ export default function Navbar() {
   return (
     <nav className="bg-gray-800 p-4">
       <div className="container mx-auto flex justify-between items-center">
-        <Link href="/" className="text-white text-lg font-bold">
-          PokerLeaderboard
+        <Link href="/" className="flex items-center space-x-2 text-white text-lg font-bold">
+          <Image
+            src="https://via.placeholder.com/40"
+            alt="Logo"
+            width={40}
+            height={40}
+            className="rounded-full"
+          />
+          <span>PokerLeaderboard</span>
         </Link>
         <div className="hidden md:flex space-x-4">
           <Link href="/" className="text-gray-300 hover:text-white">

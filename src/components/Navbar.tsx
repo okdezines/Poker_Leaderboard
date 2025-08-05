@@ -24,7 +24,7 @@ export default function Navbar() {
       <div className="container mx-auto flex justify-between items-center">
         <Link href="/" className="flex items-center space-x-2 text-white text-lg font-bold">
           <Image
-            src="https://cdn.pixabay.com/photo/2025/04/17/14/29/snake-9540569_1280.png"
+            src="https://via.placeholder.com/40"
             alt="Logo"
             width={40}
             height={40}

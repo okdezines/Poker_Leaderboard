@@ -52,3 +52,34 @@ export async function GET() {
     );
   }
 }
+
+export async function PUT(req: Request) {
+  try {
+    const { playerId, points } = await req.json();
+
+    if (!playerId || points === undefined) {
+      return NextResponse.json(
+        { message: 'Missing required fields' },
+        { status: 400 }
+      );
+    }
+
+    const { db } = await connectToDatabase();
+
+    await db.collection('leaderboard').updateOne(
+      { _id: new ObjectId(playerId) },
+      { $set: { points } }
+    );
+
+    return NextResponse.json(
+      { message: 'Player points updated successfully' },
+      { status: 200 }
+    );
+  } catch (error) {
+    console.error(error);
+    return NextResponse.json(
+      { message: 'An internal server error occurred' },
+      { status: 500 }
+    );
+  }
+}

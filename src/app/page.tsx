@@ -61,7 +61,7 @@ export default function Home() {
           <h2 className="text-2xl font-bold mb-4">Feature Game Winner</h2>
           <div className="relative w-full h-64">
             <Image
-              src="https://via.placeholder.com/400x300"
+              src="https://via.placeholder.com/40"
               alt="Feature Game Winner"
               layout="fill"
               objectFit="cover"
@@ -79,7 +79,7 @@ export default function Home() {
               <li key={event._id} className="flex items-center space-x-4">
                 <div className="relative w-16 h-16">
                   <Image
-                    src="https://via.placeholder.com/150"
+                    src="https://via.placeholder.com/40"
                     alt="Event"
                     layout="fill"
                     objectFit="cover"

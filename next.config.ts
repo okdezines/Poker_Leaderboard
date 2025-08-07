@@ -2,6 +2,9 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   /* config options here */
+<<<<<<< HEAD
+};
+=======
 }
   module.exports = {
     images: {
@@ -13,5 +16,6 @@ const nextConfig: NextConfig = {
 
 
 
+>>>>>>> main
 
 export default nextConfig;

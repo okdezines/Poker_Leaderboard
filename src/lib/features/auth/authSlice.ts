@@ -5,10 +5,6 @@ interface User {
   id: string;
   name: string;
   email: string;
-<<<<<<< HEAD
-  role: string;
-=======
->>>>>>> main
 }
 
 interface AuthState {

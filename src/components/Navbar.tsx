@@ -126,6 +126,15 @@ export default function Navbar() {
           >
             Contact
           </Link>
+          {user?.role === 'admin' && (
+            <Link
+              href="/admin"
+              className="block text-gray-300 hover:text-white py-2"
+              onClick={() => setIsOpen(false)}
+            >
+              Admin
+            </Link>
+          )}
           {isAuthenticated ? (
             <>
               <span className="block text-white py-2">Welcome, {user?.name}</span>

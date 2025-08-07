@@ -19,6 +19,7 @@ export const metadata: Metadata = {
 
 import StoreProvider from '@/lib/StoreProvider'
 import Navbar from '@/components/Navbar'
+import Footer from '@/components/Footer'
 
 export default function RootLayout({
   children,
@@ -33,6 +34,7 @@ export default function RootLayout({
         <StoreProvider>
           <Navbar />
           {children}
+          <Footer />
         </StoreProvider>
       </body>
     </html>

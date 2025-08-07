@@ -45,14 +45,11 @@ export default function Navbar() {
           <Link href="/contact" className="text-gray-300 hover:text-white">
             Contact
           </Link>
-<<<<<<< HEAD
           {user?.role === 'admin' && (
             <Link href="/admin" className="text-gray-300 hover:text-white">
               Admin
             </Link>
           )}
-=======
->>>>>>> main
           {isAuthenticated ? (
             <>
               <span className="text-white">Welcome, {user?.name}</span>
@@ -129,7 +126,6 @@ export default function Navbar() {
           >
             Contact
           </Link>
-<<<<<<< HEAD
           {user?.role === 'admin' && (
             <Link
               href="/admin"
@@ -139,8 +135,6 @@ export default function Navbar() {
               Admin
             </Link>
           )}
-=======
->>>>>>> main
           {isAuthenticated ? (
             <>
               <span className="block text-white py-2">Welcome, {user?.name}</span>

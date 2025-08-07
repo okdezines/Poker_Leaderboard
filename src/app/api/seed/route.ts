@@ -14,11 +14,19 @@ export async function GET() {
 
     // Seed users
     const users = [
+<<<<<<< HEAD
       { name: 'Alice', email: 'alice@example.com', password: await bcrypt.hash('password123', 10), role: 'admin' },
       { name: 'Bob', email: 'bob@example.com', password: await bcrypt.hash('password123', 10), role: 'user' },
       { name: 'Charlie', email: 'charlie@example.com', password: await bcrypt.hash('password123', 10), role: 'user' },
       { name: 'David', email: 'david@example.com', password: await bcrypt.hash('password123', 10), role: 'user' },
       { name: 'Eve', email: 'eve@example.com', password: await bcrypt.hash('password123', 10), role: 'user' },
+=======
+      { name: 'Alice', email: 'alice@example.com', password: await bcrypt.hash('password123', 10) },
+      { name: 'Bob', email: 'bob@example.com', password: await bcrypt.hash('password123', 10) },
+      { name: 'Charlie', email: 'charlie@example.com', password: await bcrypt.hash('password123', 10) },
+      { name: 'David', email: 'david@example.com', password: await bcrypt.hash('password123', 10) },
+      { name: 'Eve', email: 'eve@example.com', password: await bcrypt.hash('password123', 10) },
+>>>>>>> main
     ];
     const userInsertResult = await db.collection('users').insertMany(users);
     const userIds = Object.values(userInsertResult.insertedIds);

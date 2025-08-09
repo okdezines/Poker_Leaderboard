@@ -79,7 +79,7 @@ export default function Home() {
               <li key={event._id} className="flex items-center space-x-4">
                 <div className="relative w-16 h-16">
                   <Image
-                    src="https://placehold.co/"
+                    src="https://placehold.co/150x150"
                     alt="Event"
                     layout="fill"
                     objectFit="cover"

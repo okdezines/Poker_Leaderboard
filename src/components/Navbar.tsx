@@ -28,6 +28,7 @@ export default function Navbar() {
             alt="Logo"
             width={40}
             height={40}
+            alt="placeholder"
             className="rounded-full"
           />
           <span>PokerLeaderboard</span>

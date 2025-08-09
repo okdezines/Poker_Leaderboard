@@ -15,12 +15,14 @@ function AdminPage() {
   const [eventDescription, setEventDescription] = useState('');
 
   const [gameDate, setGameDate] = useState('');
-  const [gamePlayers, setGamePlayers] = useState([{ userId: '', finishingPosition: 1 }]);
+  const [gamePlayers, setGamePlayers] = useState<{ userId: string; name: string; finishingPosition: number }[]>([]);
   const [users, setUsers] = useState<User[]>([]);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [searchResults, setSearchResults] = useState<User[]>([]);
 
   useEffect(() => {
     const fetchUsers = async () => {
-      const res = await fetch('/api/users'); // This route doesn't exist yet
+      const res = await fetch('/api/users');
       if (res.ok) {
         const { users } = await res.json();
         setUsers(users);
@@ -28,6 +30,17 @@ function AdminPage() {
     };
     fetchUsers();
   }, []);
+
+  useEffect(() => {
+    if (searchTerm) {
+      const results = users.filter((user) =>
+        user.name.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+      setSearchResults(results);
+    } else {
+      setSearchResults([]);
+    }
+  }, [searchTerm, users]);
 
   const handleAddEvent = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -50,17 +63,19 @@ function AdminPage() {
       body: JSON.stringify({ date: gameDate, players: gamePlayers }),
     });
     setGameDate('');
-    setGamePlayers([{ userId: '', finishingPosition: 1 }]);
+    setGamePlayers([]);
+  };
+
+  const addPlayerToGame = (user: User) => {
+    setGamePlayers([...gamePlayers, { userId: user._id, name: user.name, finishingPosition: gamePlayers.length + 1 }]);
+    setSearchTerm('');
+    setSearchResults([]);
   };
 
   const handlePlayerChange = (index: number, field: string, value: string | number) => {
     const newPlayers = [...gamePlayers];
     newPlayers[index] = { ...newPlayers[index], [field]: value };
     setGamePlayers(newPlayers);
-  };
-
-  const addPlayer = () => {
-    setGamePlayers([...gamePlayers, { userId: '', finishingPosition: gamePlayers.length + 1 }]);
   };
 
   return (
@@ -125,18 +140,30 @@ function AdminPage() {
                 className="w-full border p-2 rounded"
               />
             </div>
+            <div>
+              <label htmlFor="playerSearch" className="block font-bold">Search for Player</label>
+              <input
+                id="playerSearch"
+                type="text"
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                className="w-full border p-2 rounded"
+              />
+              <ul className="border rounded mt-2">
+                {searchResults.map((user) => (
+                  <li
+                    key={user._id}
+                    onClick={() => addPlayerToGame(user)}
+                    className="p-2 hover:bg-gray-200 cursor-pointer"
+                  >
+                    {user.name}
+                  </li>
+                ))}
+              </ul>
+            </div>
             {gamePlayers.map((player, index) => (
               <div key={index} className="flex items-center space-x-2">
-                <select
-                  value={player.userId}
-                  onChange={(e) => handlePlayerChange(index, 'userId', e.target.value)}
-                  className="border p-2 rounded"
-                >
-                  <option value="">Select Player</option>
-                  {users.map((user) => (
-                    <option key={user._id} value={user._id}>{user.name}</option>
-                  ))}
-                </select>
+                <span>{player.name}</span>
                 <input
                   type="number"
                   value={player.finishingPosition}
@@ -145,7 +172,6 @@ function AdminPage() {
                 />
               </div>
             ))}
-            <button type="button" onClick={addPlayer} className="bg-gray-200 p-2 rounded">Add Player</button>
             <button type="submit" className="bg-blue-500 text-white p-2 rounded">Add Game</button>
           </form>
         </div>
@@ -154,4 +180,4 @@ function AdminPage() {
   );
 }
 
-export default withAuth(AdminPage);
+export default withAuth(AdminPage, 'admin');

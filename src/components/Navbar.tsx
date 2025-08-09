@@ -25,6 +25,7 @@ export default function Navbar() {
         <Link href="/" className="flex items-center space-x-2 text-white text-lg font-bold">
           <Image
             src="https://placehold.co/40x40.png"
+            alt="Logo"
             width={40}
             height={40}
             alt="placeholder"

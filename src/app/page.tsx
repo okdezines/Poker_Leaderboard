@@ -61,10 +61,10 @@ export default function Home() {
           <h2 className="text-2xl font-bold mb-4">Feature Game Winner</h2>
           <div className="relative w-full h-64">
             <Image
-              src="https://placehold.co/250x250"
+              src="https://placehold.co/300x300"
               alt="Feature Game Winner"
               layout="fill"
-              objectFit="cover"
+              // objectFit="cover"
               className="rounded-lg"
             />
           </div>

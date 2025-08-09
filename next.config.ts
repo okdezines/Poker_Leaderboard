@@ -3,12 +3,19 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   /* config options here */
 }
-  module.exports = {
-    images: {
-      domains: ['via.placeholder.com'],
-      remotePatterns: [new URL('https://cdn.pixabay.com')],
-    }
-  }
+// ✅ New way (next.config.js)
+module.exports = {
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'placehold.co',
+      },
+    ],
+  },
+};
+
+
 // next.config.js
 
 

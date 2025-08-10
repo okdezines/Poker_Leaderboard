@@ -7,6 +7,11 @@ import { AppDispatch } from '@/lib/store';
 import { useRouter } from 'next/navigation';
 import { jwtDecode } from 'jwt-decode';
 
+interface DecodedToken {
+  userId: string;
+  role: string;
+}
+
 export default function LoginPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -26,10 +31,15 @@ export default function LoginPage() {
 
     if (res.ok) {
       const { token } = await res.json();
-      const decoded: { userId: string } = jwtDecode(token);
-      const user = { id: decoded.userId, name: 'Test User', email }; // In a real app, you'd fetch the user's name
+      const decoded: DecodedToken = jwtDecode(token);
+      const user = { id: decoded.userId, name: 'Test User', email, role: decoded.role }; // In a real app, you'd fetch the user's name
       dispatch(loginSuccess({ user, token }));
-      router.push('/members');
+
+      if (decoded.role === 'admin') {
+        router.push('/admin');
+      } else {
+        router.push('/members');
+      }
     } else {
       const { message } = await res.json();
       alert(message);

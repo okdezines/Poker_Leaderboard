@@ -12,7 +12,6 @@ interface LeaderboardPlayer {
   rank: number;
 }
 
-
 interface Event {
   _id: string;
   name: string;
@@ -20,11 +19,9 @@ interface Event {
   location: string;
 }
 
-
 export default function Home() {
   const [leaderboard, setLeaderboard] = useState<LeaderboardPlayer[]>([]);
   const [events, setEvents] = useState<Event[]>([]);
-
 
   useEffect(() => {
     const fetchLeaderboard = async () => {
@@ -45,7 +42,6 @@ export default function Home() {
     fetchEvents();
   }, []);
 
-
   return (
     <main className="min-h-screen p-4 sm:p-8">
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -62,7 +58,6 @@ export default function Home() {
           </ul>
         </div>
 
-
         {/* Middle Column: Feature Game Winner */}
         <div className="md:col-span-1">
           <h2 className="text-2xl font-bold mb-4">Feature Game Winner</h2>
@@ -77,7 +72,6 @@ export default function Home() {
           </div>
           <p className="mt-2 text-center">John Doe - Winner of the Friday Night Special</p>
         </div>
-
 
         {/* Right Column: Upcoming Events */}
         <div className="md:col-span-1">

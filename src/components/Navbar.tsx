@@ -52,6 +52,9 @@ export default function Navbar() {
           )}
           {isAuthenticated ? (
             <>
+              <Link href={`/members/${user?.id}`} className="text-gray-300 hover:text-white">
+                Profile
+              </Link>
               <span className="text-white">Welcome, {user?.name}</span>
               <button
                 onClick={handleLogout}
@@ -137,6 +140,13 @@ export default function Navbar() {
           )}
           {isAuthenticated ? (
             <>
+              <Link
+                href={`/members/${user?.id}`}
+                className="block text-gray-300 hover:text-white py-2"
+                onClick={() => setIsOpen(false)}
+              >
+                Profile
+              </Link>
               <span className="block text-white py-2">Welcome, {user?.name}</span>
               <button
                 onClick={() => {

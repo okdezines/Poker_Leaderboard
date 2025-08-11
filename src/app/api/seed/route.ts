@@ -35,9 +35,9 @@ export async function GET() {
       {
         date: new Date(new Date().getTime() - 7 * 24 * 60 * 60 * 1000),
         players: [
-          { userId: userIds[0], finishingPosition: 1 },
-          { userId: userIds[1], finishingPosition: 2 },
-          { userId: userIds[2], finishingPosition: 3 },
+          { userId: userIds[0], finishingPosition: 1, winnings: 40 },
+          { userId: userIds[1], finishingPosition: 2, winnings: 20 },
+          { userId: userIds[2], finishingPosition: 3, winnings: 0 },
         ],
         buyIn: 20,
         prizePool: 60,
@@ -45,9 +45,9 @@ export async function GET() {
       {
         date: new Date(),
         players: [
-          { userId: userIds[3], finishingPosition: 1 },
-          { userId: userIds[4], finishingPosition: 2 },
-          { userId: userIds[0], finishingPosition: 3 },
+          { userId: userIds[3], finishingPosition: 1, winnings: 40 },
+          { userId: userIds[4], finishingPosition: 2, winnings: 20 },
+          { userId: userIds[0], finishingPosition: 3, winnings: 0 },
         ],
         buyIn: 20,
         prizePool: 60,

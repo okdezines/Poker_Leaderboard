@@ -32,13 +32,21 @@ export default function LoginPage() {
     if (res.ok) {
       const { token } = await res.json();
       const decoded: DecodedToken = jwtDecode(token);
-      const user = { id: decoded.userId, name: 'Test User', email, role: decoded.role }; // In a real app, you'd fetch the user's name
-      dispatch(loginSuccess({ user, token }));
 
-      if (decoded.role === 'admin') {
-        router.push('/admin');
+      // Fetch user details to get the name
+      const userRes = await fetch(`/api/users/${decoded.userId}`);
+      if (userRes.ok) {
+        const { user: userDetails } = await userRes.json();
+        const user = { id: decoded.userId, name: userDetails.name, email, role: decoded.role };
+        dispatch(loginSuccess({ user, token }));
+
+        if (decoded.role === 'admin') {
+          router.push('/admin');
+        } else {
+          router.push('/members');
+        }
       } else {
-        router.push('/members');
+        alert('Failed to fetch user details.');
       }
     } else {
       const { message } = await res.json();

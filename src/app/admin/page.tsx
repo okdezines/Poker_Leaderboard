@@ -15,7 +15,7 @@ function AdminPage() {
   const [eventDescription, setEventDescription] = useState('');
 
   const [gameDate, setGameDate] = useState('');
-  const [gamePlayers, setGamePlayers] = useState<{ userId: string; name: string; finishingPosition: number }[]>([]);
+  const [gamePlayers, setGamePlayers] = useState<{ userId: string; name: string; finishingPosition: number; winnings: number }[]>([]);
   const [users, setUsers] = useState<User[]>([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [searchResults, setSearchResults] = useState<User[]>([]);
@@ -67,7 +67,7 @@ function AdminPage() {
   };
 
   const addPlayerToGame = (user: User) => {
-    setGamePlayers([...gamePlayers, { userId: user._id, name: user.name, finishingPosition: gamePlayers.length + 1 }]);
+    setGamePlayers([...gamePlayers, { userId: user._id, name: user.name, finishingPosition: gamePlayers.length + 1, winnings: 0 }]);
     setSearchTerm('');
     setSearchResults([]);
   };
@@ -166,8 +166,16 @@ function AdminPage() {
                 <span>{player.name}</span>
                 <input
                   type="number"
+                  placeholder="Position"
                   value={player.finishingPosition}
                   onChange={(e) => handlePlayerChange(index, 'finishingPosition', parseInt(e.target.value))}
+                  className="border p-2 rounded w-24"
+                />
+                <input
+                  type="number"
+                  placeholder="Winnings"
+                  value={player.winnings}
+                  onChange={(e) => handlePlayerChange(index, 'winnings', parseInt(e.target.value))}
                   className="border p-2 rounded w-24"
                 />
               </div>

@@ -18,10 +18,12 @@ export async function GET(
 
     const games = await db.collection('games').find({ 'players.userId': new ObjectId(userId) }).toArray();
 
-    let totalWinnings = 0;
+    let totalWins = 0;
     const gameHistory = games.map((game) => {
       const player = game.players.find((p: any) => p.userId.toHexString() === userId);
-      totalWinnings += player.winnings;
+      if (player.finishingPosition === 1) {
+        totalWins++;
+      }
       return {
         _id: game._id,
         date: game.date,
@@ -32,7 +34,7 @@ export async function GET(
 
     return NextResponse.json({
       name: user.name,
-      totalWinnings,
+      totalWins,
       games: gameHistory,
     }, { status: 200 });
 

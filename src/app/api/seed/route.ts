@@ -14,11 +14,11 @@ export async function GET() {
 
     // Seed users
     const users = [
-      { name: 'Alice', email: 'alice@example.com', password: await bcrypt.hash('password123', 10), role: 'admin' },
-      { name: 'Bob', email: 'bob@example.com', password: await bcrypt.hash('password123', 10), role: 'user' },
-      { name: 'Charlie', email: 'charlie@example.com', password: await bcrypt.hash('password123', 10), role: 'user' },
-      { name: 'David', email: 'david@example.com', password: await bcrypt.hash('password123', 10), role: 'user' },
-      { name: 'Eve', email: 'eve@example.com', password: await bcrypt.hash('password123', 10), role: 'user' },
+      { name: 'Alice', email: 'alice@example.com', password: await bcrypt.hash('password123', 10), role: 'admin', profilePictureUrl: 'https://via.placeholder.com/150' },
+      { name: 'Bob', email: 'bob@example.com', password: await bcrypt.hash('password123', 10), role: 'user', profilePictureUrl: 'https://via.placeholder.com/150' },
+      { name: 'Charlie', email: 'charlie@example.com', password: await bcrypt.hash('password123', 10), role: 'user', profilePictureUrl: 'https://via.placeholder.com/150' },
+      { name: 'David', email: 'david@example.com', password: await bcrypt.hash('password123', 10), role: 'user', profilePictureUrl: 'https://via.placeholder.com/150' },
+      { name: 'Eve', email: 'eve@example.com', password: await bcrypt.hash('password123', 10), role: 'user', profilePictureUrl: 'https://via.placeholder.com/150' },
     ];
     const userInsertResult = await db.collection('users').insertMany(users);
     const userIds = Object.values(userInsertResult.insertedIds);

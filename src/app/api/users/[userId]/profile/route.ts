@@ -25,7 +25,7 @@ export async function GET(
         totalWins++;
       }
       return {
-        _id: game._id,
+        _id: game._id.toHexString(),
         date: game.date,
         winnings: player.winnings,
         finishingPosition: player.finishingPosition,

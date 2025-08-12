@@ -7,7 +7,12 @@ export async function GET() {
 
     const events = await db.collection('events').find({}).toArray();
 
-    return NextResponse.json({ events }, { status: 200 });
+    const sanitizedEvents = events.map((event) => ({
+      ...event,
+      _id: event._id.toHexString(),
+    }));
+
+    return NextResponse.json({ events: sanitizedEvents }, { status: 200 });
   } catch (error) {
     console.error(error);
     return NextResponse.json(

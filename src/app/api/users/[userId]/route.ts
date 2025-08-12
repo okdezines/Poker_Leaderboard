@@ -7,7 +7,7 @@ export async function GET(
   { params }: { params: { userId: string } }
 ) {
   try {
-    const { userId } = params;
+    const userId = params.userId;
     const { db } = await connectToDatabase();
 
     const user = await db.collection('users').findOne(

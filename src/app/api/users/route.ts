@@ -7,7 +7,12 @@ export async function GET() {
 
     const users = await db.collection('users').find({}).project({ name: 1 }).toArray();
 
-    return NextResponse.json({ users }, { status: 200 });
+    const sanitizedUsers = users.map((user) => ({
+      ...user,
+      _id: user._id.toHexString(),
+    }));
+
+    return NextResponse.json({ users: sanitizedUsers }, { status: 200 });
   } catch (error) {
     console.error(error);
     return NextResponse.json(
